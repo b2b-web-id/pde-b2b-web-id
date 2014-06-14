@@ -15,3 +15,5 @@ Sebagai langkah awal, akan dikembangkan tiruan data dan sistem dari IDX
 di sana.
 
 Semoga kami bisa membantu Anda sekalian berbisnis dengan adanya PDE ini.
+
+Web : http://pde.b2b.web.id
