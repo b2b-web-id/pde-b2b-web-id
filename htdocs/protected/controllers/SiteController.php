@@ -74,7 +74,6 @@ class SiteController extends Controller
 
 	/**
 	 * Displays the login page
-	 */
 	public function actionLogin()
 	{
 		$model=new LoginForm;
@@ -100,10 +99,36 @@ class SiteController extends Controller
 
 	/**
 	 * Logs out the current user and redirect to homepage.
-	 */
 	public function actionLogout()
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+} */
+	public function actionLogin() {
+        	//Yii::import('ext.eoauth.*');
+        	$ui = new EOAuthUserIdentity(
+			array(
+				//Set the "scope" to the service you want to use
+				'scope'=>'https://sandbox.google.com/apis/ads/publisher/',
+				'provider'=>array(
+					'request'=>'https://www.google.com/accounts/OAuthGetRequestToken',
+					'authorize'=>'https://www.google.com/accounts/OAuthAuthorizeToken',
+					'access'=>'https://www.google.com/accounts/OAuthGetAccessToken',
+				),
+			)
+		);
+		if ($ui->authenticate()) { 
+			$user=Yii::app()->user;
+			$user->login($ui);
+			$this->redirect($user->returnUrl);
+		} else throw new CHttpException(401, $ui->error);
+	}
+
+	public function actionLogout() {
+		Yii::app()->user->logout();
+		// Redirect to application home page.
+		$this->redirect(Yii::app()->homeUrl);
+	}
+
 }

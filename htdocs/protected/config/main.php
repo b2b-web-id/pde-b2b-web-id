@@ -8,6 +8,8 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'ext.eoauth.*',
+		'ext.eoauth.lib.*',
 	),
 	'modules'=>array(
 		'gii'=>array(
@@ -41,6 +43,18 @@ return array(
 		),
 		'errorHandler'=>array(
 			'errorAction'=>'site/error',
+		),
+		'log'=>array(
+			'class'=>'CLogRouter',
+			'routes'=>array(
+				array(
+					'class'=>'CFileLogRoute',
+					'levels'=>'error, warning',
+				),
+				//array(
+				//	'class'=>'CWebLogRoute',
+				//),
+			),
 		),
 	),
 	'params'=>array(

@@ -1,25 +1,13 @@
 <?php
-/* @var $this SiteController */
-
-$this->pageTitle=Yii::app()->name;
+$this->pageTitle=Yii::app()->name.": ".Yii::app()->params['name'];
 ?>
 
 <?php $this->beginWidget('bootstrap.widgets.TbHeroUnit',array(
-    'heading'=>'Welcome to '.CHtml::encode(Yii::app()->name),
+    'heading'=>CHtml::encode(Yii::app()->name.": ".Yii::app()->params['name']),
 )); ?>
-
-<p>Congratulations! You have successfully created your Yii application.</p>
-
+<p>Selamat datang di <?php echo CHtml::encode(Yii::app()->name." (".Yii::app()->params['name'].") "); ?>
+yang dibangun dan dikembangkan oleh <a href='http://www.b2b.web.id'>B2B.Web.ID</a>.</p>
 <?php $this->endWidget(); ?>
 
-<p>You may change the content of this page by modifying the following two files:</p>
-
-<ul>
-    <li>View file: <code><?php echo __FILE__; ?></code></li>
-    <li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
-</ul>
-
-<p>For more details on how to further develop this application, please read
-    the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-    Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-    should you have any questions.</p>
+<p>Untuk melihat dan menggunakan data yang ada, Anda harus memiliki akun Google. Managemen pengguna kami terhubung dengan akun Google.</p>
+<p>Silakan <?php echo CHtml::link('login',array('site/login')); ?> dengan akun Google Anda.</p>
