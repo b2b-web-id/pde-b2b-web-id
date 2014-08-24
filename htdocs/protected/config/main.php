@@ -58,7 +58,7 @@ return array(
 		),
 	),
 	'params'=>array(
-		'adminEmail'=>'webmaster@example.com',
+		'adminEmail'=>'pengelola.b2b@gmail.com',
 		'name'=>'Pusat Data Elektronik',
 	),
 );
