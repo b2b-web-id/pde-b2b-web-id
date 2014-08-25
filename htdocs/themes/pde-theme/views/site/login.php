@@ -13,6 +13,12 @@ $this->breadcrumbs=array(
 
 <p>Please fill out the following form with your login credentials:</p>
 
+<?php
+if (Yii::app()->user->hasFlash('error')) {
+	echo "<div class='error'>".Yii::app()->user->getFlash('error')."</div>";
+}
+?>
+
 <div class="form">
 
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
@@ -41,6 +47,9 @@ $this->breadcrumbs=array(
             'label'=>'Login',
         )); ?>
 	</div>
+<?php
+$this->widget('ext.eauth.EAuthWidget');
+?>
 
 <?php $this->endWidget(); ?>
 

@@ -73,8 +73,33 @@ class SiteController extends Controller
 	}
 
 	public function actionLogin() {
+		$model = new LoginForm;
+		$serviceName = Yii::app()->request->getQuery('service');
+		if (isset($serviceName)) {
+			$eauth = Yii::app()->eauth->getIdentity($serviceName);
+			$eauth->redirectUrl = Yii::app()->user->returnUrl;
+			$eauth->cancelUrl = $this->createAbsoluteUrl('site/login');
+			try {
+				if ($eauth->authenticate()) {
+					$identity = new EAuthUserIdentity($eauth);
+					if ($identity->authenticate()) {
+						Yii::app()->user->login($identity);
+						$eauth->redirect();
+					} else {
+						$eauth->cancel();
+					}
+				}
+				$this->redirect(array('site/login'));
+			}
+			catch (EAuthException $e) {
+				Yii::app()->user->setFlash('error', 'EAuthException: '.$e->getMessages());
+				$eauth->redirect($eauth->getCancelUrl());
+			}
+		}
+		$this->render('login',array('model'=>$model));
+
         	//Yii::import('ext.eoauth.*');
-        	$ui = new EOAuthUserIdentity(
+/*        	$ui = new EOAuthUserIdentity(
 			array(
 				//Set the "scope" to the service you want to use
 				'scope'=>'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
@@ -94,7 +119,7 @@ class SiteController extends Controller
 			echo("</pre>");
 			//$this->redirect($user->returnUrl);
 		} else throw new CHttpException(401, $ui->error);
-	}
+*/	}
 
 	public function actionLogout() {
 		Yii::app()->user->logout();
