@@ -77,7 +77,7 @@ class SiteController extends Controller
         	$ui = new EOAuthUserIdentity(
 			array(
 				//Set the "scope" to the service you want to use
-				'scope'=>'https://sandbox.google.com/apis/ads/publisher/',
+				'scope'=>'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
 				'provider'=>array(
 					'request'=>'https://www.google.com/accounts/OAuthGetRequestToken',
 					'authorize'=>'https://www.google.com/accounts/OAuthAuthorizeToken',
@@ -85,10 +85,14 @@ class SiteController extends Controller
 				),
 			)
 		);
-		if ($ui->authenticate()) { 
+		if ($ui->authenticate()) {
 			$user=Yii::app()->user;
 			$user->login($ui);
-			$this->redirect($user->returnUrl);
+			echo("<pre>");
+			print_r($ui);
+			print_r($user);
+			echo("</pre>");
+			//$this->redirect($user->returnUrl);
 		} else throw new CHttpException(401, $ui->error);
 	}
 

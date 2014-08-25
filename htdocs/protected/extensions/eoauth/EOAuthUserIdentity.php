@@ -37,6 +37,8 @@ class EOAuthUserIdentity extends EOAuthComponent implements IUserIdentity {
      */
     private $provider;
 
+    private $email;
+    private $profile;
 
     private $_providerClass='EOAuthProvider';
     private $_authenticated=false;
@@ -51,7 +53,7 @@ class EOAuthUserIdentity extends EOAuthComponent implements IUserIdentity {
             }
             else
                 $this->setProvider();
-            
+
             foreach($attributes as $attr=>$value)
                 $this->$attr=$value;
         }
@@ -142,6 +144,7 @@ class EOAuthUserIdentity extends EOAuthComponent implements IUserIdentity {
             $this->provider->token=$token;
 
             $this->_authenticated=true;
+            //$this->setState('name', $token->email);
         }
 
         } catch (OAuthException $e) {

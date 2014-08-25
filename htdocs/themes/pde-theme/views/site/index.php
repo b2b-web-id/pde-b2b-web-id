@@ -11,3 +11,4 @@ yang dibangun dan dikembangkan oleh <a href='http://www.b2b.web.id'>B2B.Web.ID</
 
 <p>Untuk melihat dan menggunakan data yang ada, Anda harus memiliki akun Google. Managemen pengguna kami terhubung dengan akun Google.</p>
 <p>Silakan <?php echo CHtml::link('login',array('site/login')); ?> dengan akun Google Anda.</p>
+
