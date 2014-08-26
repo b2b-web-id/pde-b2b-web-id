@@ -8,11 +8,6 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-		'ext.eoauth.*',
-		'ext.eoauth.lib.*',
-		'ext.lightopenid.*',
-		'ext.eauth.*',
-		'ext.eauth.services.*',
 	),
 	'modules'=>array(
 		'gii'=>array(
@@ -28,17 +23,6 @@ return array(
 		),
 		'bootstrap'=>array(
 			'class'=>'bootstrap.components.Bootstrap',
-		),
-		'loid'=>array('class'=>'ext.lightopenid.loid'),
-		'eauth'=>array(
-			'class'=>'ext.eauth.EAuth',
-			'popup'=>true,
-			'cache'=>false,
-			'cacheExpire'=>0,
-			'services'=> array(
-				'google'=>array('class'=>'GoogleOpenIDService'),
-				'yahoo'=>array('class'=>'YahooOpenIDService'),
-			),
 		),
 		'urlManager'=>array(
 			'urlFormat'=>'path',
@@ -65,9 +49,9 @@ return array(
 					'class'=>'CFileLogRoute',
 					'levels'=>'error, warning',
 				),
-				array(
-					'class'=>'CWebLogRoute',
-				),
+				//array(
+				//	'class'=>'CWebLogRoute',
+				//),
 			),
 		),
 	),

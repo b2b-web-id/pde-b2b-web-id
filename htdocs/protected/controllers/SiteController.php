@@ -72,59 +72,38 @@ class SiteController extends Controller
 		$this->render('contact',array('model'=>$model));
 	}
 
-	public function actionLogin() {
-		$model = new LoginForm;
-		$serviceName = Yii::app()->request->getQuery('service');
-		if (isset($serviceName)) {
-			$eauth = Yii::app()->eauth->getIdentity($serviceName);
-			$eauth->redirectUrl = Yii::app()->user->returnUrl;
-			$eauth->cancelUrl = $this->createAbsoluteUrl('site/login');
-			try {
-				if ($eauth->authenticate()) {
-					$identity = new EAuthUserIdentity($eauth);
-					if ($identity->authenticate()) {
-						Yii::app()->user->login($identity);
-						$eauth->redirect();
-					} else {
-						$eauth->cancel();
-					}
-				}
-				$this->redirect(array('site/login'));
-			}
-			catch (EAuthException $e) {
-				Yii::app()->user->setFlash('error', 'EAuthException: '.$e->getMessages());
-				$eauth->redirect($eauth->getCancelUrl());
-			}
+	/**
+	 * Displays the login page
+	 */
+	public function actionLogin()
+	{
+		$model=new LoginForm;
+
+		// if it is ajax validation request
+		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
 		}
+
+		// collect user input data
+		if(isset($_POST['LoginForm']))
+		{
+			$model->attributes=$_POST['LoginForm'];
+			// validate user input and redirect to the previous page if valid
+			if($model->validate() && $model->login())
+				$this->redirect(Yii::app()->user->returnUrl);
+		}
+		// display the login form
 		$this->render('login',array('model'=>$model));
-
-        	//Yii::import('ext.eoauth.*');
-/*        	$ui = new EOAuthUserIdentity(
-			array(
-				//Set the "scope" to the service you want to use
-				'scope'=>'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
-				'provider'=>array(
-					'request'=>'https://www.google.com/accounts/OAuthGetRequestToken',
-					'authorize'=>'https://www.google.com/accounts/OAuthAuthorizeToken',
-					'access'=>'https://www.google.com/accounts/OAuthGetAccessToken',
-				),
-			)
-		);
-		if ($ui->authenticate()) {
-			$user=Yii::app()->user;
-			$user->login($ui);
-			echo("<pre>");
-			print_r($ui);
-			print_r($user);
-			echo("</pre>");
-			//$this->redirect($user->returnUrl);
-		} else throw new CHttpException(401, $ui->error);
-*/	}
-
-	public function actionLogout() {
-		Yii::app()->user->logout();
-		// Redirect to application home page.
-		$this->redirect(Yii::app()->homeUrl);
 	}
 
+	/**
+	 * Logs out the current user and redirect to homepage.
+	 */
+	public function actionLogout()
+	{
+		Yii::app()->user->logout();
+		$this->redirect(Yii::app()->homeUrl);
+	}
 }

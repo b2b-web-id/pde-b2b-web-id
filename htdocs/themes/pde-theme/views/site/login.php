@@ -47,9 +47,6 @@ if (Yii::app()->user->hasFlash('error')) {
             'label'=>'Login',
         )); ?>
 	</div>
-<?php
-$this->widget('ext.eauth.EAuthWidget');
-?>
 
 <?php $this->endWidget(); ?>
 
