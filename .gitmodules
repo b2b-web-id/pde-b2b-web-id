@@ -1,4 +1,4 @@
 [submodule "pde-idx-app"]
 	path = pde-idx-app
-	url = git@github.com:b2b-web-id/pde-idx-app.git
+	url = https://github.com/b2b-web-id/pde-idx-app.git
 	branch = master
