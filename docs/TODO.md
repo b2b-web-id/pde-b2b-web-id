@@ -25,16 +25,17 @@ Direktori `docs/` dibuat dan berisi lima panduan:
 - File `.gitmodules` diperbarui untuk mencerminkan URL submodule baru.
 - Pada beberapa saat, direktori `vendor/` di dalam submodule telah diperbaiki (penghapusan dan pemasangan ulang Composer sebagai root) untuk mengatasi masalah izin yang mencegah Composer menulis `installed.php`.
 
-## 📌 Rencana Selanjutnya (TODO)
-
-1. **Buat `Makefile`**  
-   - Implementasikan target `dev` yang menjalankan langkah‑langkah berikut secara otomatis:  
+### Makefile
+- ✅ **Buat `Makefile`**  
+   - Telah dibuat dengan target `dev` yang menjalankan:  
      * `git submodule update --init --recursive`  
      * `docker compose up -d`  
      * `docker compose exec --user root php php composer install --no-dev --ignore-platform-reqs` (hanya jika `vendor/` belum ada)  
      * `docker compose exec php php yii migrate/up --interactive=0`  
-   - Tambah target‑target pendukung seperti `up`, `down`, `logs`, `bash-php`, `bash-db`, `test`, `lint`, dsb.  
-   - Pastikan `Makefile` berada di root repository sehinggaDeveloper cukup menjalankan `make dev` untuk mendapatkan lingkungan yang siap pakai.
+   - Termasuk target pendukung: `up`, `down`, `logs`, `bash-php`, `bash-db`, `test`, `lint`, `reset`, `help`.  
+   - Letakkan di root repository sehingga cukup `make dev` untuk lingkungan yang siap pakai.
+
+## 📌 Rencana Selanjutnya (TODO)
 
 2. **Standarisasi Variabel Lingkungan**  
    - Pertimbangkan menggunakan file `.env` (tidak di‑commit) untuk menyimpan rahasia seperti kata sandi MySQL, sehingga `docker-compose.yml` dapat merujuk ke `${MYSQL_PASSWORD}` dsb.  
@@ -67,22 +68,10 @@ Direktori `docs/` dibuat dan berisi lima panduan:
    - Lakukan code review terhadap berkas‑berkas yang baru dibuat (docs, docker‑compose, Makefile).  
    - Pastikan semua tautan di dokumen masih valid dan contoh perintah dapat disalin‑tempel langsung ke terminal.
 
-## ✅ Checklist
-
-- [ ] Create Makefile with dev target
-- [ ] Add .env template and .gitignore entry
-- [ ] Add Redis service to docker-compose.yml
-- [ ] Configure cache component in config/web.php
-- [ ] Set production env vars (YII_DEBUG=false, YII_ENV=prod)
-- [ ] Implement GitHub Actions CI/CD workflow
-- [ ] Write ops guide (docs/operations.md)
-- [ ] Verify migrations and seed data
-- [ ] Review documentation and links
-
 ---
 
 *Catatan*: File ini (`docs/TODO.md`) sebaiknya diperbarui setiap kali ada perubahan signifikan atau setelah suatu item dalam daftar selesai diselesaikan. Dengan begitu, tim akan selalu memiliki gambaran jelas tentang apa yang telah dilakukan dan apa yang masih perlu dikerjakan.
 
----
+--- 
 
 *Dibuat untuk tim PDE‑B2B‑WEB‑ID.*

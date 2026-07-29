@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-pde}
+      MYSQL_USER: ${MYSQL_USER:-pde}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-pde}
+    volumes:
+      - db_data:/var/lib/mysql
+  php:
+    image: yiisoftware/yii2-php:7.1-apache
+    user: "1000:1000"
+    environment:
+      APACHE_DOCUMENT_ROOT: /app/web
+      YII_DEBUG: ${YII_DEBUG:-false}
+      YII_ENV: ${YII_ENV:-prod}
+    volumes:
+      - ./pde-idx-app:/app
+      - ./docker/apache.conf:/etc/apache2/sites-available/000-default.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+volumes:
+  db_data:
