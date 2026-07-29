@@ -1,19 +1,24 @@
-pde-b2b-web-id
-==============
+# PDE-B2B-WEB-ID
 
-Pusat Data Elektronik
----------------------
+Proyek ini menyediakan aplikasi web berbasis Yii 2 untuk mengakses data pasar modal Indonesia Stock Exchange (IDX). Aplikasi dijalankan dalam lingkungan Docker dengan layanan MySQL dan PHP‑Apache yang terisolasi dalam jaringan internal.
 
-Gudang kode ini merupakan basis pengembangan Pusat Data Elektronik (yang
-selanjutnya akan disebut PDE) oleh B2B.Web.ID.
+## Dokumentasi
 
-PDE ini adalah kumpulan data dari berbagai sumber yang dapat digunakan
-sebagai dasar analisis berbagai keputusan bisnis.
+- [Instalasi](docs/installation.md) – panduan instalasi (Docker dan manual)
+- [Database](docs/database.md) – konfigurasi basis data, inisialisasi, migrasi, backup, dan peningkatan performa
+- [Deployment](docs/deployment.md) – petunjuk penerapan ke produksi
+- [Arsitektur](docs/architecture.md) – gambaran arsitektur tinggi komponen
+- [Pengembangan](docs/development.md) – panduan pengembangan hari‑hari
+- [TODO](docs/TODO.md) – daftar tugas dan rencana selanjutnya
 
-Sebagai langkah awal, akan dikembangkan tiruan data dan sistem dari IDX
-(Indonesia Stock Exchange) terutama profil dan kinerja perusahaan tercatat
-di sana.
+## Instalasi Cepat (Developer)
 
-Semoga kami bisa membantu Anda sekalian berbisnis dengan adanya PDE ini.
+```bash
+make dev
+```
 
-Web : http://pde.b2b.web.id
+Perintah tersebut akan memperbarui submodule, meng‑up kontainer Docker, menginstal dependensi Composer, dan menjalankan migrasi basis data. Setelah selesai, buka <http://localhost/> di browser Anda.
+
+## Lisensi
+
+Lihat file [LICENSE](LICENSE) untuk detail.

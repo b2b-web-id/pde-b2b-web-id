@@ -1,40 +1,5 @@
 # TODO – Perubahan dan Rencana Selanjutnya
 
-## ✅ Perubahan yang Sudah Dilakukan
-
-### Submodule
-- Diperbarui submodule `pde-idx-app` dari `https://github.com/yht/pde-idx-web.git` ke `https://github.com/b2b-web-id/pde-idx-app.git` (branch `master`).
-- Commit: `[master a23b830] Update submodule pde-idx-app to https://github.com/b2b-web-id/pde-idx-app.git master`
-
-### Dokumentasi
-Direktori `docs/` dibuat dan berisi lima panduan:
-- `installation.md` – panduan instalasi (Docker dan manual).
-- `database.md` – konfigurasi basis data, inisialisasi, migrasi, backup, dan peningkatan performa.
-- `deployment.md` – petunjuk penerapan ke produksi (image produksi, variabel lingkungan, orchestrator Docker Compose/Kubernetes, skalabilitas, keamanan, backup, rollback).
-- `architecture.md` – gambaran arsitektur tinggi komponen, aliran data, dan prinsip desain.
-- `development.md` – panduan pengembangan hari‑hari: menjalankan lingkungan dev, menjalankan tes (Codeception), debug, profiling, gaya kode (PHP_CS_FIXER, PHPStan), dan kontribusi melalui pull‑request.
-
-### Docker Compose
-- File `docker-compose.yml` telah disusun sehingga:
-  - Layanan `db` menggunakan image `mysql:5.7`, tidak mengekspos port ke host, menggunakan volume bernama `db_data` untuk persisten data.
-  - Layanan `php` menggunakan image `yiisoftware/yii2-php:7.1-apache`, menjalankan sebagai pengguna host (`1000:1000`) untuk menghindari masalah izin, mengatur variabel lingkungan `APACHE_DOCUMENT_ROOT=/app/web` sehingga Apache melayani direktori `web/` aplikasi, dan mem‑mount kode sumber ke `/app`.
-  - Hanya port `80` dari layanan `php` yang dipetakan ke host (yang dapat diubah dengan mudah).
-  - Jaringan Docker bawaan (`pde-b2b-web-id_default`) digunakan agar layanan bisa saling berkomunikasi melalui nama layanan (`db` dan `php`).
-
-### Lainnya
-- File `.gitmodules` diperbarui untuk mencerminkan URL submodule baru.
-- Pada beberapa saat, direktori `vendor/` di dalam submodule telah diperbaiki (penghapusan dan pemasangan ulang Composer sebagai root) untuk mengatasi masalah izin yang mencegah Composer menulis `installed.php`.
-
-### Makefile
-- ✅ **Buat `Makefile`**  
-   - Telah dibuat dengan target `dev` yang menjalankan:  
-     * `git submodule update --init --recursive`  
-     * `docker compose up -d`  
-     * `docker compose exec --user root php php composer install --no-dev --ignore-platform-reqs` (hanya jika `vendor/` belum ada)  
-     * `docker compose exec php php yii migrate/up --interactive=0`  
-   - Termasuk target pendukung: `up`, `down`, `logs`, `bash-php`, `bash-db`, `test`, `lint`, `reset`, `help`.  
-   - Letakkan di root repository sehingga cukup `make dev` untuk lingkungan yang siap pakai.
-
 ## ✅ Checklist
 
 - [x] Update submodule to https://github.com/b2b-web-id/pde-idx-app.git (master)
@@ -86,6 +51,6 @@ Direktori `docs/` dibuat dan berisi lima panduan:
 
 *Catatan*: File ini (`docs/TODO.md`) sebaiknya diperbarui setiap kali ada perubahan signifikan atau setelah suatu item dalam daftar selesai diselesaikan. Dengan begitu, tim akan selalu memiliki gambaran jelas tentang apa yang telah dilakukan dan apa yang masih perlu dikerjakan.
 
----
+--- 
 
 *Dibuat untuk tim PDE‑B2B‑WEB‑ID.*
