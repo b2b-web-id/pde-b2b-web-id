@@ -53,7 +53,7 @@ Direktori `docs/` dibuat dan berisi lima panduan:
    - Tambahkan alur kerja GitHub Actions yang:  
      * Membangun image Docker `php`.  
      * Menjalankan unit tests dan kode statis (PHP_CodeSniffer, PHPStan) dalam container.  
-     * Push image ke registry (misalnya GitHub Packages atau Docker Hub) setelah berhasil.  
+     * Push image ke registry (misalnya GitHub Packages atau Docker Hub) setelah berhasil.
 
 6. **Dokumentasi Operasional**  
    - Buat panduan ops sederhana di `docs/operations.md` yang menjelaskan cara monitoring log (`docker compose logs -f`), memeriksa status container, melakukan backup/manual restore volume `db_data`, dan melakukan rollback image.  
@@ -67,10 +67,22 @@ Direktori `docs/` dibuat dan berisi lima panduan:
    - Lakukan code review terhadap berkas‑berkas yang baru dibuat (docs, docker‑compose, Makefile).  
    - Pastikan semua tautan di dokumen masih valid dan contoh perintah dapat disalin‑tempel langsung ke terminal.
 
+## ✅ Checklist
+
+- [ ] Create Makefile with dev target
+- [ ] Add .env template and .gitignore entry
+- [ ] Add Redis service to docker-compose.yml
+- [ ] Configure cache component in config/web.php
+- [ ] Set production env vars (YII_DEBUG=false, YII_ENV=prod)
+- [ ] Implement GitHub Actions CI/CD workflow
+- [ ] Write ops guide (docs/operations.md)
+- [ ] Verify migrations and seed data
+- [ ] Review documentation and links
+
 ---
 
 *Catatan*: File ini (`docs/TODO.md`) sebaiknya diperbarui setiap kali ada perubahan signifikan atau setelah suatu item dalam daftar selesai diselesaikan. Dengan begitu, tim akan selalu memiliki gambaran jelas tentang apa yang telah dilakukan dan apa yang masih perlu dikerjakan.
 
---- 
+---
 
 *Dibuat untuk tim PDE‑B2B‑WEB‑ID.*
