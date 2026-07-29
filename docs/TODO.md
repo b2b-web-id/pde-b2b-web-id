@@ -35,6 +35,20 @@ Direktori `docs/` dibuat dan berisi lima panduan:
    - Termasuk target pendukung: `up`, `down`, `logs`, `bash-php`, `bash-db`, `test`, `lint`, `reset`, `help`.  
    - Letakkan di root repository sehingga cukup `make dev` untuk lingkungan yang siap pakai.
 
+## ✅ Checklist
+
+- [x] Update submodule to https://github.com/b2b-web-id/pde-idx-app.git (master)
+- [x] Add comprehensive documentation (installation, database, deployment, architecture, development, TODO)
+- [x] Create Makefile with dev target
+- [ ] Add .env template and .gitignore entry
+- [ ] Add Redis service to docker-compose.yml
+- [ ] Configure cache component in config/web.php
+- [ ] Set production env vars (YII_DEBUG=false, YII_ENV=prod)
+- [ ] Implement GitHub Actions CI/CD workflow
+- [ ] Write ops guide (docs/operations.md)
+- [ ] Verify migrations and seed data
+- [ ] Review documentation and links
+
 ## 📌 Rencana Selanjutnya (TODO)
 
 2. **Standarisasi Variabel Lingkungan**  
@@ -72,6 +86,6 @@ Direktori `docs/` dibuat dan berisi lima panduan:
 
 *Catatan*: File ini (`docs/TODO.md`) sebaiknya diperbarui setiap kali ada perubahan signifikan atau setelah suatu item dalam daftar selesai diselesaikan. Dengan begitu, tim akan selalu memiliki gambaran jelas tentang apa yang telah dilakukan dan apa yang masih perlu dikerjakan.
 
---- 
+---
 
 *Dibuat untuk tim PDE‑B2B‑WEB‑ID.*
